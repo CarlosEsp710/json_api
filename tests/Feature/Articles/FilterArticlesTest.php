@@ -106,4 +106,64 @@ class FilterArticlesTest extends TestCase
 
         $this->getJson($url)->assertStatus(400);
     }
+
+    /** @test */
+    public function can_search_articles_by_title_and_content()
+    {
+        Article::factory()->create([
+            'title' => 'Title',
+            'content' => 'Content'
+        ]);
+
+        Article::factory()->create([
+            'title' => 'Another article from Carlos',
+            'content' => 'Another Content...',
+        ]);
+
+        Article::factory()->create([
+            'title' => 'Another article',
+            'content' => 'Content from Carlos'
+        ]);
+
+        $url = route('api.v1.articles.index', ['filter[search]' => 'Carlos']);
+
+        $this->getJson($url)
+            ->assertJsonCount(2, 'data')
+            ->assertSee('Another article from Carlos')
+            ->assertSee('Another article')
+            ->assertDontSee('Title');
+    }
+
+    /** @test */
+    public function can_search_articles_by_title_and_content_with_multiple_terms()
+    {
+        Article::factory()->create([
+            'title' => 'Title',
+            'content' => 'Content'
+        ]);
+
+        Article::factory()->create([
+            'title' => 'Another article from Carlos',
+            'content' => 'Another Content...',
+        ]);
+
+        Article::factory()->create([
+            'title' => 'Another Laravel article from Carlos',
+            'content' => 'Another Content...',
+        ]);
+
+        Article::factory()->create([
+            'title' => 'Another article',
+            'content' => 'Content from Carlos'
+        ]);
+
+        $url = route('api.v1.articles.index', ['filter[search]' => 'Carlos Laravel']);
+
+        $this->getJson($url)
+            ->assertJsonCount(3, 'data')
+            ->assertSee('Another article from Carlos')
+            ->assertSee('Another Laravel article from Carlos')
+            ->assertSee('Another article')
+            ->assertDontSee('Title');
+    }
 }

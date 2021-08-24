@@ -13,7 +13,8 @@ class ArticleController extends Controller
 
     public function index(): ArticleCollection
     {
-        $articles =  Article::applyFilters()->applySorts(request('sort'))
+        $articles =  Article::applyFilters()
+            ->applySorts(request('sort'))
             ->jsonPaginate();
 
         return ArticleCollection::make($articles);
