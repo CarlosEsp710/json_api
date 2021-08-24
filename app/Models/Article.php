@@ -9,6 +9,8 @@ class Article extends Model
 {
     use HasFactory;
 
+    public $allowedSorts = ['title', 'content'];
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -22,7 +24,7 @@ class Article extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id' => 'string',
         'category_id' => 'integer',
         'user_id' => 'integer',
     ];
