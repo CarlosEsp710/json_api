@@ -87,6 +87,6 @@ class Authorizer extends AbstractAuthorizer
      */
     public function delete($record, $request)
     {
-        // TODO: Implement delete() method.
+        $this->authorize('delete', $record);
     }
 }
