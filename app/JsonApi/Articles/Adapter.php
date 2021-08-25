@@ -45,4 +45,10 @@ class Adapter extends AbstractAdapter
     {
         $this->filterWithScopes($query, $filters);
     }
+
+    protected function fillAttributes($article, Collection $attributes)
+    {
+        $article->fill($attributes->toArray());
+        $article->user_id = auth()->id();
+    }
 }
