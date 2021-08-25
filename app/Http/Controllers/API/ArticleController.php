@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ArticleCollection;
-use App\Http\Resources\ArticleResource;
+use App\Http\Resources\ResourceCollection;
+use App\Http\Resources\ResourceObject;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
 
-    public function index(): ArticleCollection
+    public function index(): ResourceCollection
     {
         $articles =  Article::applyFilters()
             ->applySorts(request('sort'))
             ->jsonPaginate();
 
-        return ArticleCollection::make($articles);
+        return ResourceCollection::make($articles);
     }
 
     public function store(Request $request)
@@ -34,12 +34,12 @@ class ArticleController extends Controller
             'content' => $request->input('data.attributes.content')
         ]);
 
-        return ArticleResource::make($article);
+        return ResourceObject::make($article);
     }
 
-    public function show(Article $article): ArticleResource
+    public function show(Article $article): ResourceObject
     {
-        return ArticleResource::make($article);
+        return ResourceObject::make($article);
     }
 
     public function update(Request $request, Article $article)
