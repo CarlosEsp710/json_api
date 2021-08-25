@@ -2,10 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Http\Responses\JsonApiValidationErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use CloudCreativity\LaravelJsonApi\Exceptions\HandlesErrors;
-use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
