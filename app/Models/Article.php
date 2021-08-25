@@ -12,8 +12,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    public $allowedSorts = ['title', 'content'];
-
     /**
      * The attributes that aren't mass assignable.
      *
@@ -31,15 +29,6 @@ class Article extends Model
         'category_id' => 'integer',
         'user_id' => 'integer',
     ];
-
-    public function fields()
-    {
-        return [
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'content' => $this->content
-        ];
-    }
 
     public function category()
     {

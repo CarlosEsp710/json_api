@@ -4,11 +4,15 @@ namespace App\Exceptions;
 
 use App\Http\Responses\JsonApiValidationErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use CloudCreativity\LaravelJsonApi\Exceptions\HandlesErrors;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+
+    use HandlesErrors;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -41,8 +45,17 @@ class Handler extends ExceptionHandler
         });
     }
 
-    protected function invalidJson($request, ValidationException $exception): JsonApiValidationErrorResponse
+    // protected function invalidJson($request, ValidationException $exception): JsonApiValidationErrorResponse
+    // {
+    //     return new JsonApiValidationErrorResponse($exception);
+    // }
+
+    public function render($request, Throwable $exception)
     {
-        return new JsonApiValidationErrorResponse($exception);
+        if ($this->isJsonApi($request, $exception)) {
+            return $this->renderJsonApi($request, $exception);
+        }
+
+        return parent::render($request, $exception);
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\API\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('articles/{article}', [ArticleController::class, 'show'])->name('api.v1.articles.show');
+use CloudCreativity\LaravelJsonApi\Facades\JsonApi;
 
-Route::get('articles', [ArticleController::class, 'index'])->name('api.v1.articles.index');
-
-Route::post('articles/store', [ArticleController::class, 'store'])->name('api.v1.articles.store');
+JsonApi::register('v1')->routes(function ($api) {
+    $api->resource('articles');
+});
