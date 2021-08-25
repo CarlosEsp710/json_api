@@ -24,7 +24,7 @@ class UpdateArticlesTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_users_can_update_articles()
+    public function authenticated_users_can_update_their_articles()
     {
         $article = Article::factory()->create();
 
@@ -44,6 +44,35 @@ class UpdateArticlesTest extends TestCase
             ])
             ->patch(route('api.v1.articles.update', $article))
             ->assertStatus(200);
+    }
+
+    /** @test */
+    public function authenticated_users_cannot_update_others_articles()
+    {
+        $article = Article::factory()->create();
+
+        Sanctum::actingAs(User::factory()->create());
+
+        $this->jsonApi()
+            ->content([
+                'data' => [
+                    'type' => 'articles',
+                    'id' => $article->getRouteKey(),
+                    'attributes' => [
+                        'title' => 'Title changed',
+                        'slug' => 'title-changed',
+                        'content' => 'Content changed',
+                    ]
+                ]
+            ])
+            ->patch(route('api.v1.articles.update', $article))
+            ->assertStatus(403);
+
+        $this->assertDatabaseMissing('articles', [
+            'title' => 'Title changed',
+            'slug' => 'title-changed',
+            'content' => 'Content changed',
+        ]);
     }
 
     /** @test */
