@@ -44,6 +44,7 @@ class Schema extends SchemaProvider
             'authors' => [
                 'related' => true,
                 'showSelf' => true,
+                'showData' => isset($includeRelationships['authors']),
                 'data' => function () use ($article) {
                     return $article->user;
                 }

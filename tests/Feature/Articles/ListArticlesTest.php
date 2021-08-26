@@ -31,10 +31,6 @@ class ListArticlesTest extends TestCase
                 ],
                 'relationships' => [
                     'authors' => [
-                        'data' => [
-                            'type' => 'authors',
-                            'id' => $article->user->id
-                        ],
                         'links' => [
                             'self' => route('api.v1.articles.relationships.authors.replace', $article),
                             'related' => route('api.v1.articles.relationships.authors', $article)
@@ -46,6 +42,11 @@ class ListArticlesTest extends TestCase
                 ]
             ]
         ]);
+
+        $this->assertNull($response->json(
+            'data.relationships.authors.data',
+            "The key 'data.relationships.authors.data' must be null"
+        ));
     }
 
     /** @test */
@@ -69,10 +70,6 @@ class ListArticlesTest extends TestCase
                     ],
                     'relationships' => [
                         'authors' => [
-                            'data' => [
-                                'type' => 'authors',
-                                'id' => $articles[0]->user->id
-                            ],
                             'links' => [
                                 'self' => route('api.v1.articles.relationships.authors.replace', $articles[0]),
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[0])
@@ -95,10 +92,6 @@ class ListArticlesTest extends TestCase
                     ],
                     'relationships' => [
                         'authors' => [
-                            'data' => [
-                                'type' => 'authors',
-                                'id' => $articles[1]->user->id
-                            ],
                             'links' => [
                                 'self' => route('api.v1.articles.relationships.authors.replace', $articles[1]),
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[1])
@@ -121,10 +114,6 @@ class ListArticlesTest extends TestCase
                     ],
                     'relationships' => [
                         'authors' => [
-                            'data' => [
-                                'type' => 'authors',
-                                'id' => $articles[2]->user->id
-                            ],
                             'links' => [
                                 'self' => route('api.v1.articles.relationships.authors.replace', $articles[2]),
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[2])
