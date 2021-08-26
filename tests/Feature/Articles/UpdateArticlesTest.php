@@ -19,7 +19,17 @@ class UpdateArticlesTest extends TestCase
         $article = Article::factory()->create();
 
         $this->jsonApi()
-            ->patch(route('api.v1.articles.update', $article))
+            ->content([
+                'data' => [
+                    'type' => 'articles',
+                    'id' => $article->getRouteKey(),
+                    'attributes' => [
+                        'title' => 'Title changed',
+                        'slug' => 'title-changed',
+                        'content' => 'Content changed',
+                    ]
+                ]
+            ])->patch(route('api.v1.articles.update', $article))
             ->assertStatus(401);
     }
 

@@ -6,9 +6,11 @@ use CloudCreativity\LaravelJsonApi\Auth\AbstractAuthorizer;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Authorizer extends AbstractAuthorizer
 {
+    protected $guards = ['sanctum'];
 
     /**
      * Authorize a resource index request.
@@ -39,7 +41,7 @@ class Authorizer extends AbstractAuthorizer
      */
     public function create($type, $request)
     {
-        // TODO: Implement create() method.
+        $this->authenticate();
     }
 
     /**
@@ -71,7 +73,7 @@ class Authorizer extends AbstractAuthorizer
      */
     public function update($record, $request)
     {
-        $this->authorize('update', $record);
+        $this->can('update', $record);
     }
 
     /**
@@ -87,6 +89,6 @@ class Authorizer extends AbstractAuthorizer
      */
     public function delete($record, $request)
     {
-        $this->authorize('delete', $record);
+        $this->can('delete', $record);
     }
 }
