@@ -37,4 +37,15 @@ class Schema extends SchemaProvider
             'updatedAt' => $resource->updated_at,
         ];
     }
+
+    public function getRelationships($article, $isPrimary, array $includeRelationships)
+    {
+        return [
+            'authors' => [
+                'data' => function () use ($article) {
+                    return $article->user;
+                }
+            ]
+        ];
+    }
 }
