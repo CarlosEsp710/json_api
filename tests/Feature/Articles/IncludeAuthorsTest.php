@@ -19,7 +19,12 @@ class IncludeAuthorsTest extends TestCase
         $this->jsonApi()
             ->includePaths('authors')
             ->get(route('api.v1.articles.read', $article))
-            ->dump()
-            ->assertSee($article->user->name);
+            ->assertSee($article->user->name)
+            ->assertJsonFragment([
+                'related' => route('api.v1.articles.relationships.authors', $article)
+            ])
+            ->assertJsonFragment([
+                'self' => route('api.v1.articles.relationships.authors.replace', $article)
+            ]);
     }
 }
