@@ -32,7 +32,7 @@ class ListArticlesTest extends TestCase
                 'relationships' => [
                     'authors' => [
                         'links' => [
-                            'self' => route('api.v1.articles.relationships.authors.replace', $article),
+                            'self' => 'http://jsonapi.test/api/v1/articles/' . $article->getRouteKey() . '/relationships/authors',
                             'related' => route('api.v1.articles.relationships.authors', $article)
                         ]
                     ]
@@ -71,7 +71,7 @@ class ListArticlesTest extends TestCase
                     'relationships' => [
                         'authors' => [
                             'links' => [
-                                'self' => route('api.v1.articles.relationships.authors.replace', $articles[0]),
+                                'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[0]->getRouteKey() . '/relationships/authors',
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[0])
                             ]
                         ]
@@ -93,7 +93,7 @@ class ListArticlesTest extends TestCase
                     'relationships' => [
                         'authors' => [
                             'links' => [
-                                'self' => route('api.v1.articles.relationships.authors.replace', $articles[1]),
+                                'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[1]->getRouteKey() . '/relationships/authors',
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[1])
                             ]
                         ]
@@ -115,7 +115,7 @@ class ListArticlesTest extends TestCase
                     'relationships' => [
                         'authors' => [
                             'links' => [
-                                'self' => route('api.v1.articles.relationships.authors.replace', $articles[2]),
+                                'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[2]->getRouteKey() . '/relationships/authors',
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[2])
                             ]
                         ]

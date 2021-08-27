@@ -3,6 +3,7 @@
 namespace Tests\Feature\Articles;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -19,12 +20,12 @@ class IncludeAuthorsTest extends TestCase
         $this->jsonApi()
             ->includePaths('authors')
             ->get(route('api.v1.articles.read', $article))
-            ->assertSee($article->user->name)
+            ->assertSee($article->user->name, false)
             ->assertJsonFragment([
                 'related' => route('api.v1.articles.relationships.authors', $article)
             ])
             ->assertJsonFragment([
-                'self' => route('api.v1.articles.relationships.authors.replace', $article)
+                'self' => 'http://jsonapi.test/api/v1/articles/' . $article->getRouteKey() . '/relationships/authors'
             ]);
     }
 
