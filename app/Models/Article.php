@@ -72,4 +72,11 @@ class Article extends Model
                 ->orWhere('content', 'LIKE', "%{$value}%");
         }
     }
+
+    public function scopeCategories(Builder $query, $values)
+    {
+        $query->whereHAs('category', function ($q) use ($values) {
+            $q->whereIn('slug', explode(',', $values));
+        });
+    }
 }
