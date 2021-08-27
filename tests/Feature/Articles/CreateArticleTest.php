@@ -35,7 +35,8 @@ class CreateArticleTest extends TestCase
         $user = User::factory()->create();
 
         $article = array_filter(Article::factory()->raw([
-            'category_id' => null
+            'category_id' => null,
+            'approved' => true // mass assignment check
         ]));
 
         $category = Category::factory()->create();
