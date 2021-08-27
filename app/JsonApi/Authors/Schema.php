@@ -35,4 +35,18 @@ class Schema extends SchemaProvider
             'updatedAt' => $resource->updated_at,
         ];
     }
+
+    public function getRelationships($author, $isPrimary, array $includeRelationships)
+    {
+        return [
+            'articles' => [
+                self::SHOW_RELATED => true,
+                self::SHOW_SELF => true,
+                self::SHOW_DATA => isset($includeRelationships['articles']),
+                self::DATA => function () use ($author) {
+                    return $author->articles;
+                }
+            ]
+        ];
+    }
 }

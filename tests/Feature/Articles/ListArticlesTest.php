@@ -35,6 +35,12 @@ class ListArticlesTest extends TestCase
                             'self' => 'http://jsonapi.test/api/v1/articles/' . $article->getRouteKey() . '/relationships/authors',
                             'related' => route('api.v1.articles.relationships.authors', $article)
                         ]
+                    ],
+                    'categories' => [
+                        'links' => [
+                            'self' => 'http://jsonapi.test/api/v1/articles/' . $article->getRouteKey() . '/relationships/categories',
+                            'related' => route('api.v1.articles.relationships.categories', $article)
+                        ]
                     ]
                 ],
                 'links' => [
@@ -74,6 +80,12 @@ class ListArticlesTest extends TestCase
                                 'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[0]->getRouteKey() . '/relationships/authors',
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[0])
                             ]
+                        ],
+                        'categories' => [
+                            'links' => [
+                                'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[0]->getRouteKey() . '/relationships/categories',
+                                'related' => route('api.v1.articles.relationships.categories', $articles[0])
+                            ]
                         ]
                     ],
                     'links' => [
@@ -96,6 +108,12 @@ class ListArticlesTest extends TestCase
                                 'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[1]->getRouteKey() . '/relationships/authors',
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[1])
                             ]
+                        ],
+                        'categories' => [
+                            'links' => [
+                                'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[1]->getRouteKey() . '/relationships/categories',
+                                'related' => route('api.v1.articles.relationships.categories', $articles[1])
+                            ]
                         ]
                     ],
                     'links' => [
@@ -117,6 +135,12 @@ class ListArticlesTest extends TestCase
                             'links' => [
                                 'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[2]->getRouteKey() . '/relationships/authors',
                                 'related' => route('api.v1.articles.relationships.authors',  $articles[2])
+                            ]
+                        ],
+                        'categories' => [
+                            'links' => [
+                                'self' => 'http://jsonapi.test/api/v1/articles/' . $articles[2]->getRouteKey() . '/relationships/categories',
+                                'related' => route('api.v1.articles.relationships.categories', $articles[2])
                             ]
                         ]
                     ],

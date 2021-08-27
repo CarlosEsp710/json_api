@@ -28,6 +28,14 @@ class ListCategoriesTest extends TestCase
                     'createdAt' => $category->created_at,
                     'updatedAt' => $category->updated_at
                 ],
+                'relationships' => [
+                    'articles' => [
+                        'links' => [
+                            'self' => 'http://jsonapi.test/api/v1/categories/' . $category->getRouteKey() . '/relationships/articles',
+                            'related' => route('api.v1.categories.relationships.articles', $category)
+                        ]
+                    ]
+                ],
                 'links' => [
                     'self' => route('api.v1.categories.read', $category)
                 ]
@@ -53,6 +61,14 @@ class ListCategoriesTest extends TestCase
                         'createdAt' => $categories[0]->created_at,
                         'updatedAt' => $categories[0]->updated_at,
                     ],
+                    'relationships' => [
+                        'articles' => [
+                            'links' => [
+                                'self' => 'http://jsonapi.test/api/v1/categories/' . $categories[0]->getRouteKey() . '/relationships/articles',
+                                'related' => route('api.v1.categories.relationships.articles', $categories[0])
+                            ]
+                        ]
+                    ],
                     'links' => [
                         'self' => route('api.v1.categories.read', $categories[0])
                     ]
@@ -66,6 +82,14 @@ class ListCategoriesTest extends TestCase
                         'createdAt' => $categories[1]->created_at,
                         'updatedAt' => $categories[1]->updated_at,
                     ],
+                    'relationships' => [
+                        'articles' => [
+                            'links' => [
+                                'self' => 'http://jsonapi.test/api/v1/categories/' . $categories[1]->getRouteKey() . '/relationships/articles',
+                                'related' => route('api.v1.categories.relationships.articles', $categories[1])
+                            ]
+                        ]
+                    ],
                     'links' => [
                         'self' => route('api.v1.categories.read', $categories[1])
                     ]
@@ -78,6 +102,14 @@ class ListCategoriesTest extends TestCase
                         'slug' => $categories[2]->slug,
                         'createdAt' => $categories[2]->created_at,
                         'updatedAt' => $categories[2]->updated_at,
+                    ],
+                    'relationships' => [
+                        'articles' => [
+                            'links' => [
+                                'self' => 'http://jsonapi.test/api/v1/categories/' . $categories[2]->getRouteKey() . '/relationships/articles',
+                                'related' => route('api.v1.categories.relationships.articles', $categories[2])
+                            ]
+                        ]
                     ],
                     'links' => [
                         'self' => route('api.v1.categories.read', $categories[2])
