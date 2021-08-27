@@ -68,6 +68,7 @@ return [
     'resources' => [
         'authors' => \App\Models\User::class,
         'articles' => \App\Models\Article::class,
+        'categories' => \App\Models\Category::class,
     ],
 
     /*
